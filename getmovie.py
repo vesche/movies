@@ -51,13 +51,13 @@ def main():
     movie_title = movie.title
     movie_year = movie.year
     movie_poster = movie.cover_url
-    movie_url = 'www.imdb.com/title/{}'.format(result['imdb_id'])
+    movie_url = 'http://www.imdb.com/title/{}'.format(result['imdb_id'])
 
     print('{} ({})'.format(movie_title, movie_year))
     print(movie_poster)
     print(movie_url)
 
-    cont = input("\nLook right (Y/n)? ")
+    cont = input('\nLook right (Y/n)? ')
     if cont.lower().startswith('n'):
         print('Ok, stopped.')
         sys.exit(1)
@@ -66,8 +66,14 @@ def main():
     os.system('wget -O images/{} {}'.format(image_name, movie_poster))
     print('Poster downloaded!')
 
-    print('\nMarkdown:')
-    print('[![{}](../images/{})]({})'.format(movie_title, image_name, movie_url))
+    # print('\nMarkdown:')
+    # print('[![{}](../images/{})]({})'.format(movie_title, image_name, movie_url))
+
+    markdown = ' [![{}](../images/{})]({})'.format(movie_title, image_name, movie_url)
+
+    with open('lists/{}.md'.format(movie_year), 'a') as f:
+        f.write(markdown)
+    print('Markdown added!')
 
 
 if __name__ == '__main__':
