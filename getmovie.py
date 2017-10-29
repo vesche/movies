@@ -63,7 +63,7 @@ def main():
         sys.exit(1)
 
     image_name = '{}_{}.jpg'.format('_'.join(movie_title.split()), movie_year)
-    os.system('wget -O images/{} {}'.format(image_name, movie_poster))
+    os.system('wget -O images/"{}" "{}"'.format(image_name, movie_poster))
     print('Poster downloaded!')
 
     # print('\nMarkdown:')
