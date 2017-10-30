@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 #
@@ -10,6 +10,7 @@
 import argparse
 import os
 import sys
+import urllib.request
 
 try:
     from imdbpie import Imdb
@@ -63,14 +64,10 @@ def main():
         sys.exit(1)
 
     image_name = '{}_{}.jpg'.format('_'.join(movie_title.split()), movie_year)
-    os.system('wget -O images/"{}" "{}"'.format(image_name, movie_poster))
+    urllib.request.urlretrieve(movie_poster, 'images/{}'.format(image_name))
     print('Poster downloaded!')
 
-    # print('\nMarkdown:')
-    # print('[![{}](../images/{})]({})'.format(movie_title, image_name, movie_url))
-
     markdown = ' [![{}](../images/{})]({})'.format(movie_title, image_name, movie_url)
-
     with open('lists/{}.md'.format(movie_year), 'a') as f:
         f.write(markdown)
     print('Markdown added!')
